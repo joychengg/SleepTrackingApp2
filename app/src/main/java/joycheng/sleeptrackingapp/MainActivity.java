@@ -13,6 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,7 +45,35 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(getDataPoint());
+        graph.addSeries(series);
+
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"Monday", "Tuesday", "Wednesday","Thursday","Friday"});
+        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+        graph.setTitle("Rachel Sunderland's Total Hours Slept");
+        graph.setTitleTextSize(50);
+
+
+        series.setSpacing(10);
+        series.setDataWidth(1);
     }
+
+    private DataPoint[] getDataPoint() {
+        DataPoint[] dp = new DataPoint[] {
+
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        };
+        return dp;
+    }
+
 
     @Override
     public void onBackPressed() {
