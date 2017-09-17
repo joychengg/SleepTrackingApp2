@@ -32,4 +32,9 @@
         android:layout_below="@+id/btnShowNotification"
         android:layout_centerHorizontal="true"/>
 
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="match_parent"
+        android:layout_height="500dip"
+        android:id="@+id/graph"  />
+
 </android.support.constraint.ConstraintLayout>
